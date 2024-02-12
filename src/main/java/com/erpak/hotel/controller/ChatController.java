@@ -7,6 +7,8 @@ import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.messaging.simp.SimpMessageHeaderAccessor;
 import org.springframework.stereotype.Controller;
 
+import java.security.Principal;
+
 @Controller
 public class ChatController {
 
@@ -22,6 +24,7 @@ public class ChatController {
     @SendTo("/topic/public")
     public ChatMessage addUser(@Payload ChatMessage chatMessage,
                                SimpMessageHeaderAccessor headerAccessor) {
+
 
         headerAccessor.getSessionAttributes().put("username", chatMessage.getSender());
         return chatMessage;
